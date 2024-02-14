@@ -1,22 +1,21 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { GameT, GamesT } from '../game.types';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-game-list',
   templateUrl: './game-list.component.html'
 })
-export class GameListComponent {
+export class GameListComponent implements OnInit {
 
   @HostBinding('class') classes: string = 'flex gap-10';
 
-  array = ['game 1', 'game 2', 'game 3'];
-  games: GamesT = this.array.map(this.createGame);
+  games: GamesT = [];
 
-  private createGame(name: string): GameT {
-    return {
-      id: crypto.randomUUID(),
-      name
-    }
+  constructor(private gameService: GameService) {}
+
+  ngOnInit(): void {
+    this.gameService.games$.subscribe((newList) => this.games = newList);
   }
 
 }
