@@ -1,5 +1,5 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { GameT, GamesT } from '../game.types';
+import { GamesT } from '../game.types';
 import { GameService } from '../game.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { GameService } from '../game.service';
 })
 export class GameListComponent implements OnInit {
 
-  @HostBinding('class') classes: string = 'flex gap-10';
+  @HostBinding('class') classes: string = 'flex flex-col gap-5';
 
   games: GamesT = [];
 
