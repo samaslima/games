@@ -1,0 +1,19 @@
+<input 
+    #game
+    class="border border-gray-300 text-sm rounded-md focus:border-blue-500 block w-full p-2.5" 
+    id="name" 
+    type="text" 
+    placeholder="Nome" 
+    [formControl]="name"
+    (keyup.enter)="onEnter(game.value)">
+<span 
+    class="font-bold text-red-600 text-xs" 
+    *ngIf="name.invalid && name.dirty">
+    Campo Inválido
+</span>
+<button
+    class="text-white bg-blue-700 font-medium rounded-md text-sm px-5 py-2.5 disabled:bg-slate-300 disabled:text-black" 
+    [disabled]="name.invalid"
+    (click)="submitForm()">
+    Adicionar jogo
+</button>

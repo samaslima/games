@@ -19,4 +19,11 @@ export class GameService {
       name
     }
   }
+
+  public newGame(name: string) {
+    const game = this.createGame(name);
+    const listGames: GameT[] = [...this.games$.getValue(), game];
+    
+    this.games$.next(listGames);
+  }
 }

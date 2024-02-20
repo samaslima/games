@@ -7,7 +7,7 @@ import { GameT } from '../game.types';
 })
 export class GameDetailsComponent {
 
-  @HostBinding('class') classes: string = 'flex flex-col gap-1 p-6 border-6 shadow-lg';
+  @HostBinding('class') classes: string = 'flex flex-col gap-1 p-6 shadow-md border';
 
   @Input() game!: GameT;
 

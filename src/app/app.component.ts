@@ -6,7 +6,7 @@ import { Component, HostBinding } from '@angular/core';
 })
 export class AppComponent {
 
-  @HostBinding('class') classes: string = 'block max-w-5xl mx-auto p-2';
+  @HostBinding('class') classes: string = 'block w-screen p-6 grid grid-cols-2 gap-6';
 
   title = 'games-app';
 }
