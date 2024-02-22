@@ -1,11 +1,10 @@
 <input 
-    #game
     class="border border-gray-300 text-sm rounded-md focus:border-blue-500 block w-full p-2.5" 
-    id="name" 
     type="text" 
     placeholder="Nome" 
+    minlength="3"
     [formControl]="name"
-    (keyup.enter)="onEnter(game.value)">
+    (keyup.enter)="submitForm()">
 <span 
     class="font-bold text-red-600 text-xs" 
     *ngIf="name.invalid && name.dirty">

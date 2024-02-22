@@ -15,12 +15,11 @@ export class GameFormComponent {
   constructor(private gameService: GameService) {}
 
   public submitForm() {
-    this.gameService.newGame(this.name.value as string);
-    this.name.reset();
-  }
-
-  public onEnter(game: string) {
-    this.gameService.newGame(game);
-    this.name.reset();
+    if (this.name.valid) {
+      this.gameService.newGame(this.name.value as string);
+      this.name.reset();
+    } else {
+      this.name.markAsDirty
+    }
   }
 }
