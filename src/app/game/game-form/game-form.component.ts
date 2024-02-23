@@ -10,7 +10,9 @@ export class GameFormComponent {
 
   @HostBinding('class') classes: string = 'flex flex-col gap-2';
 
-  name = new FormControl('', Validators.required);
+  name = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3)]);
 
   constructor(private gameService: GameService) {}
 
@@ -19,7 +21,7 @@ export class GameFormComponent {
       this.gameService.newGame(this.name.value as string);
       this.name.reset();
     } else {
-      this.name.markAsDirty
+      this.name.markAsDirty();
     }
   }
 }
