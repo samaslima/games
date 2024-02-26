@@ -32,7 +32,8 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/explicit-module-boundary-types": "warn"
       }
     },
     {
@@ -42,9 +43,7 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {
-        "@typescript-eslint/explicit-module-boundary-types": "warn"
-      }
+      "rules": {}
     }
   ]
 }
