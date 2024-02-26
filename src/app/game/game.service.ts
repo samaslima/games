@@ -1,29 +1,26 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { GameT } from './game.types';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
+import { GameT } from "./game.types";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class GameService {
-
-  private array = ['game 1', 'game 2', 'game 3'];
+  private array = ["game 1", "game 2", "game 3"];
 
   public games$ = new BehaviorSubject(this.array.map(this.createGame));
-
-  constructor() { }
 
   private createGame(name: string): GameT {
     return {
       id: crypto.randomUUID(),
-      name
-    }
+      name,
+    };
   }
 
-  public newGame(name: string) {
+  public newGame(name: string): void {
     const game = this.createGame(name);
     const listGames: GameT[] = [...this.games$.getValue(), game];
-    
+
     this.games$.next(listGames);
   }
 }

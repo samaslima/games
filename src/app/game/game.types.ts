@@ -1,6 +1,6 @@
 type GameT = {
-    id: string,
-    name: string
+  id: string;
+  name: string;
 };
 
 type GamesT = GameT[];
