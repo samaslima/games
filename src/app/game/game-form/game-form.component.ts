@@ -1,22 +1,19 @@
-import { Component, HostBinding } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { GameService } from '../game.service';
+import { Component, HostBinding } from "@angular/core";
+import { FormControl, Validators } from "@angular/forms";
+import { GameService } from "../game.service";
 
 @Component({
-  selector: 'app-game-form',
-  templateUrl: './game-form.component.html'
+  selector: "app-game-form",
+  templateUrl: "./game-form.component.html",
 })
 export class GameFormComponent {
+  @HostBinding("class") classes = "flex flex-col gap-2";
 
-  @HostBinding('class') classes: string = 'flex flex-col gap-2';
-
-  name = new FormControl('', [
-    Validators.required,
-    Validators.minLength(3)]);
+  name = new FormControl("", [Validators.required, Validators.minLength(3)]);
 
   constructor(private gameService: GameService) {}
 
-  public submitForm() {
+  public submitForm(): void {
     if (this.name.valid) {
       this.gameService.newGame(this.name.value as string);
       this.name.reset();
