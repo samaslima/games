@@ -23,4 +23,12 @@ export class GameService {
 
     this.games$.next(listGames);
   }
+
+  public deleteGame(id: string): void {
+    const newList: GameT[] = [...this.games$.getValue()].filter(
+      (game) => game.id !== id,
+    );
+
+    this.games$.next(newList);
+  }
 }
