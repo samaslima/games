@@ -7,7 +7,7 @@ import { Component, EventEmitter, HostBinding, Output } from "@angular/core";
 export class XIconComponent {
   @Output() delete = new EventEmitter<void>();
 
-  @HostBinding("class") classes = "relative w-6";
+  @HostBinding("class") classes = "w-6";
 
   public deleteGame(): void {
     this.delete.emit();

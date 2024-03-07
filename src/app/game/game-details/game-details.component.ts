@@ -7,7 +7,8 @@ import { GameService } from "../game.service";
   templateUrl: "./game-details.component.html",
 })
 export class GameDetailsComponent {
-  @HostBinding("class") classes = "flex flex-col gap-1 p-6 shadow-md border";
+  @HostBinding("class") classes =
+    "grid grid-cols-2 grid-rows-2 gap-1 p-6 shadow-md border";
 
   @Input() game!: GameT;
 
