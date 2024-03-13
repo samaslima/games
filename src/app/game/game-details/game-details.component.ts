@@ -14,7 +14,7 @@ export class GameDetailsComponent {
 
   constructor(private gameService: GameService) {}
 
-  public deleteGame(id: string): void {
-    this.gameService.deleteGame(id);
+  public deleteGame(): void {
+    this.gameService.deleteGame(this.game.id);
   }
 }
