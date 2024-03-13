@@ -25,9 +25,9 @@ export class GameService {
   }
 
   public deleteGame(id: string): void {
-    const newList: GameT[] = [...this.games$.getValue()].filter(
-      (game) => game.id !== id,
-    );
+    const newList: GameT[] = this.games$
+      .getValue()
+      .filter((game) => game.id !== id);
 
     this.games$.next(newList);
   }
