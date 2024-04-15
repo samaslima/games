@@ -1,1 +1,8 @@
-<app-game-list></app-game-list> <app-game-form></app-game-form>
+ <nav class="bg-gray-500">
+    <div class="text-white text-sm font-medium font-mono px-3 py-3 flex gap-4">
+        <a routerLink="/games" routerLinkActive="underline decoration-2" ariaCurrentWhenActive="page">Jogo</a>
+        <a routerLink="/players" routerLinkActive="underline decoration-2" ariaCurrentWhenActive="page">Jogador</a>
+    </div>
+</nav> 
+
+<router-outlet></router-outlet>
