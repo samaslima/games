@@ -6,6 +6,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { PlayerListComponent } from "./player-list/player-list.component";
 import { PlayerDetailsComponent } from "./player-details/player-details.component";
 import { PlayerFormComponent } from "./player-form/player-form.component";
+import { IconsModule } from "../icons/icons.module";
 
 const playerRoutes: Routes = [
   { path: "players", component: PlayerListComponent },
@@ -21,6 +22,7 @@ const playerRoutes: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    IconsModule,
     RouterModule.forChild(playerRoutes),
   ],
   exports: [PlayerListComponent, PlayerFormComponent],
