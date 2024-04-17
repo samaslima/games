@@ -22,4 +22,12 @@ export class PlayerService {
 
     this.players$.next(listPlayers);
   }
+
+  public deletePlayer(id: string): void {
+    const newList: PlayerT[] = this.players$
+      .getValue()
+      .filter((player) => player.id !== id);
+
+    this.players$.next(newList);
+  }
 }
