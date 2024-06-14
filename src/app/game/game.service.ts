@@ -1,34 +1,32 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { GameT } from "./game.types";
+import { GameT, GamesT } from "./game.types";
+import { HttpClient } from "@angular/common/http";
+import { Observable, Subject, tap } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class GameService {
-  private array = ["game 1", "game 2", "game 3"];
+  private url = "http://localhost:3000";
 
-  public games$ = new BehaviorSubject(this.array.map(this.createGame));
+  public deleteEvent = new Subject<void>();
 
-  private createGame(name: string): GameT {
-    return {
-      id: crypto.randomUUID(),
-      name,
-    };
+  constructor(private http: HttpClient) {}
+
+  public getGames(): Observable<GamesT> {
+    return this.http.get<GamesT>(`${this.url}/games`);
   }
 
-  public newGame(name: string): void {
-    const game = this.createGame(name);
-    const listGames: GameT[] = [...this.games$.getValue(), game];
-
-    this.games$.next(listGames);
+  public newGame(name: string): Observable<GameT> {
+    const game = { name };
+    return this.http.post<GameT>(`${this.url}/games`, game);
   }
 
-  public deleteGame(id: string): void {
-    const newList: GameT[] = this.games$
-      .getValue()
-      .filter((game) => game.id !== id);
-
-    this.games$.next(newList);
+  public deleteGame(id: string): Observable<string> {
+    return this.http
+      .delete(`${this.url}/games/${id}`, {
+        responseType: "text",
+      })
+      .pipe(tap(() => this.deleteEvent.next()));
   }
 }
