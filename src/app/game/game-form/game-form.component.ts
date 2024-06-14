@@ -15,7 +15,7 @@ export class GameFormComponent {
 
   public submitForm(): void {
     if (this.name.valid) {
-      this.gameService.newGame(this.name.value as string);
+      this.gameService.newGame(this.name.value as string).subscribe();
       this.name.reset();
     } else {
       this.name.markAsDirty();

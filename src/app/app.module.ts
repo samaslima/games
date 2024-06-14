@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 
 import { AppComponent } from "./app.component";
@@ -14,6 +15,7 @@ const appRoutes: Routes = [
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     GameModule,
     PlayerModule,
     RouterModule.forRoot(appRoutes),
