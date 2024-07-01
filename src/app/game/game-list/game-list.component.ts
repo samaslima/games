@@ -9,17 +9,21 @@ import { GameService } from "../game.service";
 export class GameListComponent implements OnInit, OnDestroy {
   @HostBinding("class") classes = "flex flex-col gap-5";
 
+  private eventSubscription: any;
+
   games: GamesT = [];
 
   constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
     this.getGames();
-    this.gameService.deleteEvent.subscribe(() => this.getGames());
+    this.eventSubscription = this.gameService.deleteEvent.subscribe(() =>
+      this.getGames(),
+    );
   }
 
   ngOnDestroy(): void {
-    this.gameService.deleteEvent.unsubscribe();
+    this.eventSubscription.unsubscribe();
   }
 
   public getGames(): void {

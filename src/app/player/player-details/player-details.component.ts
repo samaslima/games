@@ -15,6 +15,6 @@ export class PlayerDetailsComponent {
   constructor(private playerService: PlayerService) {}
 
   public deletePlayer(): void {
-    this.playerService.deletePlayer(this.player.id);
+    this.playerService.deletePlayer(this.player.id).subscribe();
   }
 }
