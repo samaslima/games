@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnDestroy, OnInit } from "@angular/core";
 import { PlayersT } from "../player.type";
 import { PlayerService } from "../player.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-player-list",
@@ -9,7 +10,7 @@ import { PlayerService } from "../player.service";
 export class PlayerListComponent implements OnInit, OnDestroy {
   @HostBinding("class") classes = "flex flex-col gap-5";
 
-  private eventSubscription: any;
+  private eventSubscription!: Subscription;
 
   players: PlayersT = [];
 
@@ -26,7 +27,7 @@ export class PlayerListComponent implements OnInit, OnDestroy {
     this.eventSubscription.unsubscribe();
   }
 
-  public getPlayers(): void {
+  getPlayers(): void {
     this.playerService
       .getPlayers()
       .subscribe((newList) => (this.players = newList));

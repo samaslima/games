@@ -1,6 +1,7 @@
 import { Component, HostBinding, Input } from "@angular/core";
 import { GameT } from "../game.types";
 import { GameService } from "../game.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-game-details",
@@ -12,9 +13,22 @@ export class GameDetailsComponent {
 
   @Input() game!: GameT;
 
-  constructor(private gameService: GameService) {}
+  constructor(
+    private gameService: GameService,
+    private router: Router,
+  ) {}
 
-  public deleteGame(): void {
+  deleteGame(): void {
     this.gameService.deleteGame(this.game.id).subscribe();
+  }
+
+  updateGame(): void {
+    this.gameService.updateGame(this.game.id, this.game.name).subscribe();
+  }
+
+  navigateForm(): void {
+    this.router.navigateByUrl("/game-form", {
+      state: this.game,
+    });
   }
 }
