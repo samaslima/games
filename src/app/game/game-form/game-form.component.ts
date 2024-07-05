@@ -1,21 +1,56 @@
-import { Component, HostBinding } from "@angular/core";
+import { Component, HostBinding, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
 import { GameService } from "../game.service";
+import { ActivatedRoute } from "@angular/router";
+import { Subscription, filter, map } from "rxjs";
+import { GameT } from "../game.types";
+
+type ModeT = "Adicionar" | "Atualizar";
 
 @Component({
   selector: "app-game-form",
   templateUrl: "./game-form.component.html",
 })
-export class GameFormComponent {
+export class GameFormComponent implements OnInit, OnDestroy {
   @HostBinding("class") classes = "flex flex-col gap-2";
 
   name = new FormControl("", [Validators.required, Validators.minLength(3)]);
+  gameId!: string;
 
-  constructor(private gameService: GameService) {}
+  mode: ModeT = "Adicionar";
+  private routeSubscription!: Subscription;
 
-  public submitForm(): void {
+  constructor(
+    private gameService: GameService,
+    private activatedRoute: ActivatedRoute,
+  ) {}
+
+  ngOnInit(): void {
+    this.routeSubscription = this.activatedRoute.paramMap
+      .pipe(
+        map(() => window.history.state),
+        filter((game) => !!game.id),
+      )
+      .subscribe((game: GameT) => {
+        this.name.setValue(game.name);
+        this.gameId = game.id;
+        this.mode = "Atualizar";
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
+  }
+
+  submitForm(): void {
     if (this.name.valid) {
-      this.gameService.newGame(this.name.value as string).subscribe();
+      if (this.mode === "Adicionar") {
+        this.gameService.newGame(this.name.value as string).subscribe();
+      } else {
+        this.gameService
+          .updateGame(this.gameId, this.name.value as string)
+          .subscribe();
+      }
       this.name.reset();
     } else {
       this.name.markAsDirty();
