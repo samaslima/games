@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
 import { GameService } from "../game.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription, filter, map } from "rxjs";
 import { GameT } from "../game.types";
 
@@ -15,7 +15,7 @@ export class GameFormComponent implements OnInit, OnDestroy {
   @HostBinding("class") classes = "flex flex-col gap-2";
 
   name = new FormControl("", [Validators.required, Validators.minLength(3)]);
-  gameId!: string;
+  private gameId!: string;
 
   mode: ModeT = "Adicionar";
   private routeSubscription!: Subscription;
@@ -23,6 +23,7 @@ export class GameFormComponent implements OnInit, OnDestroy {
   constructor(
     private gameService: GameService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -52,8 +53,13 @@ export class GameFormComponent implements OnInit, OnDestroy {
           .subscribe();
       }
       this.name.reset();
+      this.navigateToList();
     } else {
       this.name.markAsDirty();
     }
+  }
+
+  private navigateToList(): void {
+    this.router.navigateByUrl("/games");
   }
 }
