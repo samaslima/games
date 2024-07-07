@@ -46,14 +46,14 @@ export class GameFormComponent implements OnInit, OnDestroy {
   submitForm(): void {
     if (this.name.valid) {
       if (this.mode === "Adicionar") {
-        this.gameService.newGame(this.name.value as string).subscribe();
+        this.gameService
+          .newGame(this.name.value as string)
+          .subscribe(() => this.navigateToList());
       } else {
         this.gameService
           .updateGame(this.gameId, this.name.value as string)
-          .subscribe();
+          .subscribe(() => this.navigateToList());
       }
-      this.name.reset();
-      this.navigateToList();
     } else {
       this.name.markAsDirty();
     }
