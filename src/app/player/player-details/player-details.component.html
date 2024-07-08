@@ -1,4 +1,4 @@
 <h1 class="font-semibold row-start-1 col-start-1">{{player.name}}</h1>
 <h2 class="text-xs text-zinc-400 row-start-2 col-start-1">{{player.id}}</h2>
 <app-x-icon class="row-start-1 col-start-2 justify-self-end" (delete)="deletePlayer()"></app-x-icon>
-<app-edit-icon class="row-start-2 col-start-2 justify-self-end"></app-edit-icon>
+<app-edit-icon class="row-start-2 col-start-2 justify-self-end" (click)="navigateForm()" (update)="updatePlayer()"></app-edit-icon>
